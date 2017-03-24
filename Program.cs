@@ -56,16 +56,25 @@ namespace NoShowBot
                     await e.Channel.SendMessage("pong");
                 });
             cService.CreateCommand("nsfw")
-                .Description("Posts a random picture from the NoShowLewdCollectionTM")
-                .Do(async (e) =>
+               .Description("Posts a random picture from the NoShowLewdCollectionTM")
+               .Do(async (e) =>
                 {
                     Random rnd = new Random();
-                    int rnd1 = rnd.Next(1, 1049);
+                    int rnd1 = rnd.Next(1, 1049); //Second value 1 higher than amount of pictures in the folder
                     var rndpng = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd1 + ".jpg";
                     await e.Channel.SendFile(rndpng);
                 });
+            cService.CreateCommand("hentai")
+                .Description("Posts a random picture from the NoShowHentaiCollectionTM")
+                .Do(async (e) =>
+                {
+                    Random rnd = new Random();
+                    int rnd1 = rnd.Next(1, 50);
+                    var rndpng = "C:/Users/Tawa/Desktop/NoShowBot/Hentai/" + rnd1 + ".jpg";
+                    await e.Channel.SendFile(rndpng);
+                });
             cService.CreateCommand("cosplay")
-                .Description("Posts a random picture from the NoShowLewdCollectionTM")
+                .Description("Posts a random picture from the NoShowCosplayCollectionTM")
                 .Do(async (e) =>
                 {
                     Random rnd = new Random();
@@ -73,60 +82,44 @@ namespace NoShowBot
                     var rndpng = "C:/Users/Tawa/Desktop/NoShowBot/Cosplay/" + rnd1 + ".png";
                     await e.Channel.SendFile(rndpng);
                 });
-            cService.CreateCommand("gif")
-                .Description("Posts a random picture from the NoShowLewdGifCollectionTM - Currently broken. You can try your luck, but dont spam.")
-                .Do(async (e) =>
-                {
-                    Random rnd = new Random();
-                    int rnd1 = rnd.Next(1, 53);
-                    var rndgif = "C:/Users/Tawa/Desktop/NoShowBot/gifs/" + rnd1 + ".gif";
-                    await e.Channel.SendFile(rndgif);
-                });
+
             cService.CreateCommand("picdump")
-                .Description("Only needs to be used when the bot was restarted. Starts the NSFW Picture Dumping Queue in the channel its used in.")
+                .Description("DONT USE THIS YOU FUCKS")
                 .Do(async (e) =>
                 {
-                    while(true)
+                    while (true)
                     {
                         Random rnd = new Random();
-                        int rnd1 = rnd.Next(1, 1049);
-                        var rndjpg1 = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd1 + ".jpg";
-                        await e.Channel.SendMessage(rnd1 + ".jpg");
-                        await e.Channel.SendFile(rndjpg1);
-                        int rnd2 = rnd.Next(1, 1049);
-                        while (rnd2 == rnd1)
+                        int rnd1 = rnd.Next(0, 1049);
+                        int rnd2 = rnd.Next(0, 1049);
+                        int rnd3 = rnd.Next(0, 1049);
+                        int rnd4 = rnd.Next(0, 1049);
+                        int rnd5 = rnd.Next(0, 1049);
+
+                        while (rnd1 == rnd2 || rnd1 == rnd3 || rnd1 == rnd4 || rnd1 == rnd5)
                         {
-                            rnd2 = rnd.Next(1, 1049);
+                            rnd1 = rnd.Next(0, 1049);
+                            rnd2 = rnd.Next(0, 1049);
+                            rnd3 = rnd.Next(0, 1049);
+                            rnd4 = rnd.Next(0, 1049);
+                            rnd5 = rnd.Next(0, 1049);
                         }
-                        var rndjpg2 = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd2 + ".jpg";
-                        await e.Channel.SendMessage(rnd2 + ".jpg");
-                        await e.Channel.SendFile(rndjpg2);
-                        int rnd3 = rnd.Next(1, 1049);
-                        while (rnd3 == rnd1 || rnd3 == rnd2)
-                        {
-                            rnd3 = rnd.Next(1, 1049);
-                        }
-                        var rndjpg3 = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd3 + ".jpg";
-                        await e.Channel.SendMessage(rnd3 + ".jpg");
-                        await e.Channel.SendFile(rndjpg3);
-                        int rnd4= rnd.Next(1, 1049);
-                        while (rnd4 == rnd1 || rnd4 == rnd2 || rnd4 == rnd3)
-                        {
-                            rnd4 = rnd.Next(1, 1049);
-                        }
-                        var rndjpg4 = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd4 + ".jpg";
-                        await e.Channel.SendMessage(rnd4 + ".jpg");
-                        await e.Channel.SendFile(rndjpg4);
-                        int rnd5 = rnd.Next(1, 1049);
-                        while (rnd5 == rnd1 || rnd5 == rnd2 || rnd5 == rnd3 || rnd5 == rnd4)
-                        {
-                            rnd5 = rnd.Next(1, 1049);
-                        }
-                        var rndjpg5 = "C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd5 + ".jpg";
-                        await e.Channel.SendMessage(rnd5 + ".jpg");
-                        await e.Channel.SendFile(rndjpg5);
-                        Console.WriteLine("[INFO] [SERVICE] Picture sent ------------------------------------");
-                        Thread.Sleep(3600000);
+                        //A while loop to keep the bot from posting the same picture twice in one go.
+                        await e.Channel.SendMessage(rnd1 + "");
+                        await e.Channel.SendFile("C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd1 + ".jpg");
+                        Thread.Sleep(1000);
+                        await e.Channel.SendMessage(rnd2 + "");
+                        await e.Channel.SendFile("C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd2 + ".jpg");
+                        Thread.Sleep(1000);
+                        await e.Channel.SendMessage(rnd3 + "");
+                        await e.Channel.SendFile("C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd3 + ".jpg");
+                        Thread.Sleep(1000);
+                        await e.Channel.SendMessage(rnd4 + "");
+                        await e.Channel.SendFile("C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd4 + ".jpg");
+                        Thread.Sleep(1000);
+                        await e.Channel.SendMessage(rnd5 + "");
+                        await e.Channel.SendFile("C:/Users/Tawa/Desktop/NoShowBot/Pictures/" + rnd5 + ".jpg");
+                        Thread.Sleep(10800000);
                     }
                 });
         }
